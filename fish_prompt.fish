@@ -22,6 +22,10 @@ function prompt_whitespace -d "Function to show a whitespace"
   echo -n -s " "
 end
 
+function prompt_carriage_return -d "Function to show a carriage return"
+  echo -e -n "\r"
+end
+
 ## Function to show current status
 function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
@@ -112,6 +116,7 @@ end
 ## SHOW PROMPT
 function fish_prompt
   set -g RETVAL $status
+  prompt_carriage_return
   show_status
   show_virtualenv
   show_user
