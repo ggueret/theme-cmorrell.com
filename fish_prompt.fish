@@ -79,7 +79,7 @@ function _set_venv_project --on-variable VIRTUAL_ENV
     else
       set -l venvname (basename "$VIRTUAL_ENV")
       if [ $venvname = ".virtualenv" ]
-        set -g VIRTUAL_ENV_PROJECT (basename "$PWD")
+        set -g VIRTUAL_ENV_PROJECT $PWD
       end
     end
 end
@@ -88,7 +88,7 @@ end
 function show_pwd -d "Show the current directory"
   set -l pwd
   if [ (string match -r '^'"$VIRTUAL_ENV_PROJECT" $PWD) ]
-    set pwd (string replace -r '^'"$VIRTUAL_ENV_PROJECT"'($|/)' '≫ $1' $PWD)
+    set pwd (string replace -r '^'"$VIRTUAL_ENV_PROJECT"'($|/)' '≫$1' $PWD)
   else
     set pwd (prompt_pwd)
   end
