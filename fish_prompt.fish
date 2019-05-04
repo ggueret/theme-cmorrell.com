@@ -16,18 +16,24 @@ function prompt_segment -d "Function to show a segment"
   end
 end
 
+function prompt_whitespace -d "Function to show a whitespace"
+  set_color -b normal
+  set_color normal
+  echo -n -s " "
+end
+
 ## Function to show current status
 function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
-    prompt_segment red white " ▲ "
+    prompt_segment red white " ▲ "; prompt_whitespace
     set pad ""
     end
   if [ -n "$SSH_CLIENT" ]
-    prompt_segment blue white " SSH: "
+    prompt_segment blue white " SSH: "; prompt_whitespace
     set pad ""
   else
     if [ -n "$FISH_THEME_DEFAULT_STATUS" ]
-      prompt_segment normal yellow " $FISH_THEME_DEFAULT_STATUS "
+      prompt_segment normal yellow " $FISH_THEME_DEFAULT_STATUS "; prompt_whitespace
     end
   end
 end
@@ -45,14 +51,18 @@ end
 ## Show user if not in default users
 function show_user -d "Show user"
   if not contains $USER $default_user; or test -n "$SSH_CLIENT"
-    set -l host $FISH_PROMPT_HOSTNAME; or set -l host (hostname -s)
-    set -l who $FISH_PROMPT_WHOAMI; or set -l who (whoami)
-    prompt_segment normal yellow " $who"
+    if test -z $FISH_PROMPT_HOSTNAME
+      set -x FISH_PROMPT_HOSTNAME (hostname -s)
+    end
+    if test -z $FISH_PROMPT_WHOAMI
+      set -x FISH_PROMPT_WHOAMI (whoami)
+    end
+    prompt_segment normal yellow $FISH_PROMPT_WHOAMI
 
     # Skip @ bit if hostname == username
     if [ "$USER" != "$HOST" ]
       prompt_segment normal normal "@"
-      prompt_segment normal green "$host "
+      prompt_segment normal green "$FISH_PROMPT_HOSTNAME "
       set pad ""
     end
   end
@@ -82,7 +92,7 @@ end
 
 # Show prompt w/ privilege cue
 function show_prompt -d "Shows prompt with cue for current priv"
-  set -l separator $FISH_THEME_SEPARATOR; or set -l separator "\$"
+  set -ql separator $FISH_THEME_SEPARATOR; or set -l separator "\$"
 
   set -l uid (id -u $USER)
     if [ $uid -eq 0 ]
@@ -90,7 +100,7 @@ function show_prompt -d "Shows prompt with cue for current priv"
     set_color normal
     echo -n -s " "
   else
-    prompt_segment normal white " $separator "
+    prompt_segment normal white "$separator "
     end
 
   set_color normal
