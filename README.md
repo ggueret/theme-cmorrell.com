@@ -2,7 +2,7 @@
 
 This theme is forked from [cmorrell](https://github.com/oh-my-fish/theme-cmorrell.com), thanks to him for his excellent work !
 
-[screenshot](https://raw.githubusercontent.com/ggueret/ggueret-theme/master/screenshot.png)
+[screenshot](https://raw.githubusercontent.com/ggueret/theme-ggueret/master/screenshot.png)
 
 ## Installation
 
