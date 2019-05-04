@@ -1,3 +1,27 @@
+# ggueret fish theme
+
+This theme is forked from [cmorrell](https://github.com/oh-my-fish/theme-cmorrell.com), thanks to him for his excellent work !
+
+## Installation
+
+ggueret-theme is not yet submitted to appear as an official omf package.
+
+Thereby, an additional step is required before enabling the theme :
+
+```sh
+git clone https://github.com/ggueret/theme-ggueret.git $OMF_PATH/themes/ggueret
+```
+
+Then, enable the theme :
+```sh
+omf theme ggueret
+# Updating https://github.com/oh-my-fish/packages-main master... Done!
+# Error: ggueret already installed.
+```
+
+Do not pay attention to the error, it is normal since we cloned the package just before.
+
+
 # Chris Morrell's Fish Theme
 
 This is a theme I designed for myself but have given to a few friends and decided to publish for others' enjoyment.
