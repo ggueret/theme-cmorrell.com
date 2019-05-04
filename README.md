@@ -2,6 +2,8 @@
 
 This theme is forked from [cmorrell](https://github.com/oh-my-fish/theme-cmorrell.com), thanks to him for his excellent work !
 
+[screenshot](https://raw.githubusercontent.com/ggueret/ggueret-theme/master/screenshot.png)
+
 ## Installation
 
 ggueret-theme is not yet submitted to appear as an official omf package.
