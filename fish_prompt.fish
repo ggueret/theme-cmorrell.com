@@ -27,14 +27,15 @@ function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
     prompt_segment red white " $RETVAL "; prompt_whitespace
     set pad ""
-    end
+    return
+  end
   if [ -n "$SSH_CLIENT" ]
     prompt_segment blue white " SSH: "; prompt_whitespace
     set pad ""
-  else
-    if [ -n "$FISH_THEME_DEFAULT_STATUS" ]
-      prompt_segment normal yellow " $FISH_THEME_DEFAULT_STATUS "; prompt_whitespace
-    end
+    return
+  end
+  if [ -n "$FISH_THEME_DEFAULT_STATUS" ]
+    prompt_segment normal yellow " $FISH_THEME_DEFAULT_STATUS "; prompt_whitespace
   end
 end
 
@@ -92,15 +93,17 @@ end
 
 # Show prompt w/ privilege cue
 function show_prompt -d "Shows prompt with cue for current priv"
-  set -ql separator $FISH_THEME_SEPARATOR; or set -l separator "\$"
+  if test -z $FISH_THEME_SEPARATOR
+    set -x FISH_THEME_SEPARATOR "\$"
+  end
 
   set -l uid (id -u $USER)
     if [ $uid -eq 0 ]
-    prompt_segment red white " $separator "
+    prompt_segment red white " $FISH_THEME_SEPARATOR "
     set_color normal
     echo -n -s " "
   else
-    prompt_segment normal white "$separator "
+    prompt_segment normal white "$FISH_THEME_SEPARATOR "
     end
 
   set_color normal
