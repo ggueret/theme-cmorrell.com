@@ -35,7 +35,10 @@ end
 function show_virtualenv -d "Show active python virtual environments"
   if set -q VIRTUAL_ENV
     set -l venvname (basename "$VIRTUAL_ENV")
-    prompt_segment normal white " ($venvname) "
+    if [ $venvname = ".virtualenv" ]
+      set venvname (basename "$PWD")
+    end
+    prompt_segment normal white "($venvname) "
   end
 end
 
@@ -58,6 +61,11 @@ end
 function _set_venv_project --on-variable VIRTUAL_ENV
     if test -e $VIRTUAL_ENV/.project
         set -g VIRTUAL_ENV_PROJECT (cat $VIRTUAL_ENV/.project)
+    else
+      set -l venvname (basename "$VIRTUAL_ENV")
+      if [ $venvname = ".virtualenv" ]
+        set -g VIRTUAL_ENV_PROJECT (basename "$PWD")
+      end
     end
 end
 
