@@ -49,7 +49,7 @@ function show_virtualenv -d "Show active python virtual environments"
     if [ $venvname = ".virtualenv" ]
       set venvname (basename "$PWD")
     end
-    prompt_segment normal white "($venvname) "
+    prompt_segment normal normal "($venvname) "
   end
 end
 
