@@ -38,8 +38,8 @@ end
 ## Show user if not in default users
 function show_user -d "Show user"
   if not contains $USER $default_user; or test -n "$SSH_CLIENT"
-    set -l host (hostname -s)
-    set -l who (whoami)
+    set -l host $FISH_PROMPT_HOSTNAME; or set -l host (hostname -s)
+    set -l who $FISH_PROMPT_WHOAMI; or set -l who (whoami)
     prompt_segment normal yellow " $who"
 
     # Skip @ bit if hostname == username
