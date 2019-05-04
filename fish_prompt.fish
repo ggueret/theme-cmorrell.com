@@ -23,9 +23,13 @@ function show_status -d "Function to show the current status"
     set pad ""
     end
   if [ -n "$SSH_CLIENT" ]
-      prompt_segment blue white " SSH: "
-      set pad ""
+    prompt_segment blue white " SSH: "
+    set pad ""
+  else
+    if [ -n "$FISH_THEME_DEFAULT_STATUS" ]
+      prompt_segment normal yellow " $FISH_THEME_DEFAULT_STATUS "
     end
+  end
 end
 
 function show_virtualenv -d "Show active python virtual environments"
