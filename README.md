@@ -1,10 +1,12 @@
 # ggueret fish theme
 
+![screenshot](https://raw.githubusercontent.com/ggueret/theme-ggueret/master/screenshot.png)
+
 This theme is forked from [cmorrell](https://github.com/oh-my-fish/theme-cmorrell.com), thanks to him for his excellent work !
 
-[screenshot](https://raw.githubusercontent.com/ggueret/theme-ggueret/master/screenshot.png)
+Color scheme used is the [Tomorrow Night Theme](https://github.com/chriskempson/tomorrow-theme) using the [Ubuntu Mono](https://design.ubuntu.com/font/) font type.
 
-## Installation
+## Install
 
 ggueret-theme is not yet submitted to appear as an official omf package.
 
@@ -17,12 +19,20 @@ git clone https://github.com/ggueret/theme-ggueret.git $OMF_PATH/themes/ggueret
 Then, enable the theme :
 ```sh
 omf theme ggueret
-# Updating https://github.com/oh-my-fish/packages-main master... Done!
-# Error: ggueret already installed.
 ```
 
 Do not pay attention to the error, it is normal since we cloned the package just before.
 
+## Customize
+
+The initial goal is to be able to override anything displayed on line :
+
+```sh
+set -x FISH_THEME_DEFAULT_STATUS ""
+set -x FISH_THEME_SEPARATOR "\$"
+set -x FISH_PROMPT_HOSTNAME (hostname -s)
+set -x FISH_PROMPT_WHOAMI (whoami)
+```
 
 # Chris Morrell's Fish Theme
 
