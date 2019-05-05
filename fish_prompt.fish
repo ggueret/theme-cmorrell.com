@@ -44,7 +44,7 @@ function show_status -d "Function to show the current status"
 end
 
 function show_virtualenv -d "Show active python virtual environments"
-  if set -q VIRTUAL_ENV
+  if set -q VIRTUAL_ENV; and [ "$FISH_THEME_OVERRIDE_VIRTUALENV" != "false" ]
     set -l venvname (basename "$VIRTUAL_ENV")
     if [ $venvname = ".virtualenv" ]
       set venvname (basename "$PWD")
@@ -103,9 +103,7 @@ function show_prompt -d "Shows prompt with cue for current priv"
 
   set -l uid (id -u $USER)
     if [ $uid -eq 0 ]
-    prompt_segment red white " $FISH_THEME_SEPARATOR "
-    set_color normal
-    echo -n -s " "
+    prompt_segment red white " $FISH_THEME_SEPARATOR "; prompt_whitespace
   else
     prompt_segment normal white "$FISH_THEME_SEPARATOR "
     end
@@ -116,7 +114,9 @@ end
 ## SHOW PROMPT
 function fish_prompt
   set -g RETVAL $status
-  prompt_carriage_return
+  if [ "$FISH_THEME_OVERRIDE_VIRTUALENV" != "false" ]
+    prompt_carriage_return
+  end
   show_status
   show_virtualenv
   show_user
