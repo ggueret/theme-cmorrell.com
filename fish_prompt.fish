@@ -29,12 +29,12 @@ end
 ## Function to show current status
 function show_status -d "Function to show the current status"
   if [ $RETVAL -ne 0 ]
-    prompt_segment red white " $RETVAL "; prompt_whitespace
+    prompt_segment red brblack " $RETVAL "; prompt_whitespace
     set pad ""
     return
   end
   if [ -n "$SSH_CLIENT" ]
-    prompt_segment blue white " SSH: "; prompt_whitespace
+    prompt_segment blue brblack " SSH: "; prompt_whitespace
     set pad ""
     return
   end
